@@ -22,6 +22,9 @@
 *.a
 *.lib
 
+# Compiler Dependencies
+*.d
+
 # Executables
 *.exe
 *.out
