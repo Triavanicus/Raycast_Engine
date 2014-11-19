@@ -19,11 +19,31 @@ flags= \
 	-O2 \
 	-g3
 
+
+ifdef production
+flags=$(flags) \
+	-mwindows \
+	-lm \
+	-ldinput8 \
+	-ldxguid \
+	-ldxerr8 \
+	-luser32 \
+	-lgdi32 \
+	-lwinmm \
+	-limm32 \
+	-lole32 \
+	-loleaut32 \
+	-lshell32 \
+	-lversion \
+	-luuid \
+	-static-libgcc
+endif
+
 sdlDir=C:/Dev/SDL2_64/
 
 flagsI=-I$(includeDir) -I$(sdlDir)include
 flagsL=-L$(sdlDir)lib
-flagsD=
+flagsD=-DWIDTH=800 -DHEIGHT=600
 #END   PROJECT SPECIFIC MAKE CODE
 
 CXXFLAGS=$(flagsI) $(flagsL) $(flagsD) $(osflags) $(flags)

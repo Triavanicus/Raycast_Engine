@@ -2,16 +2,24 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 
+#include <Game/Game.hpp>
+
+#ifndef HEIGHT
 #define HEIGHT 720
+#endif
+#ifndef WIDTH
 #define WIDTH 1280
+#endif
+#ifndef TITLE
 #define TITLE "This is a game"
+#endif
 
 bool init();
 
 int main(int argc, char* args[])
 {
     SDL_Window* window = nullptr;
-    SDL_Surface* screenSurface = nullptr;
+    SDL_Renderer* renderer = nullptr;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0)
     {
@@ -29,15 +37,21 @@ int main(int argc, char* args[])
         return 1;
     }
 
-    screenSurface = SDL_GetWindowSurface(window);
-    SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format,
-                                                 0x00,
-                                                 0x00,
-                                                 0x00
-    ));
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    if(renderer == nullptr) {
+        std::cout << "Renderer could not be created: " << SDL_GetError() << "\n";
+        return 1;
+    }
 
-    SDL_UpdateWindowSurface(window);
-    SDL_Delay(2000);
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+
+    // add intro to game and stuff
+    tv::Game game(window, renderer);
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    renderer = nullptr;
+    window = nullptr;
 
     return 0;
 }
