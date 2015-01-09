@@ -4,25 +4,11 @@
 
 #include <Game/Game.hpp>
 
-#ifndef HEIGHT
-#define HEIGHT 720
-#endif
-#ifndef WIDTH
-#define WIDTH 1280
-#endif
-#ifndef TITLE
-#define TITLE "This is a game"
-#endif
-
-bool init();
-
-int main(int argc, char* args[])
-{
+int main(int argc, char* args[]) {
     SDL_Window* window = nullptr;
     SDL_Renderer* renderer = nullptr;
 
-    if(SDL_Init(SDL_INIT_VIDEO) < 0)
-    {
+    if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         std::cout << "SDL could not initialize: " << SDL_GetError() << "\n";
         return 1;
     }
@@ -31,8 +17,7 @@ int main(int argc, char* args[])
                               SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT,
                               SDL_WINDOW_SHOWN);
 
-    if(window == nullptr)
-    {
+    if(window == nullptr) {
         std::cout << "Window could not be created: " << SDL_GetError() << "\n";
         return 1;
     }
@@ -42,6 +27,8 @@ int main(int argc, char* args[])
         std::cout << "Renderer could not be created: " << SDL_GetError() << "\n";
         return 1;
     }
+
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
 
@@ -54,10 +41,4 @@ int main(int argc, char* args[])
     window = nullptr;
 
     return 0;
-}
-
-bool init()
-{
-
-    return true;
 }

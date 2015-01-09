@@ -43,7 +43,13 @@ sdlDir=C:/Dev/SDL2_64/
 
 flagsI=-I$(includeDir) -I$(sdlDir)include
 flagsL=-L$(sdlDir)lib
-flagsD=-DWIDTH=800 -DHEIGHT=600
+flagsD=-DHEIGHT=600 \
+	-DHALF_HEIGHT=300 \
+	-DWIDTH=800 \
+	-DALL_PIXELS=800*600 \
+	-DTITLE="\"This is a game\"" \
+	-DPI=3.14159265359 \
+	-DRADIAN=0.0174532925 \
 #END   PROJECT SPECIFIC MAKE CODE
 
 CXXFLAGS=$(flagsI) $(flagsL) $(flagsD) $(osflags) $(flags)
