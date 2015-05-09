@@ -1,4 +1,4 @@
-#include <Game/InputManager.hpp>
+#include "InputManager.hpp"
 
 using namespace tv;
 

@@ -1,29 +1,27 @@
 
 #include <iostream>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
-#include <Game/Game.hpp>
+#include "Game/Game.hpp"
 
 int main(int argc, char* args[]) {
     SDL_Window* window = nullptr;
     SDL_Renderer* renderer = nullptr;
 
-    if(SDL_Init(SDL_INIT_VIDEO) < 0) {
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         std::cout << "SDL could not initialize: " << SDL_GetError() << "\n";
         return 1;
     }
 
-    window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_UNDEFINED,
-                              SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT,
-                              SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 
-    if(window == nullptr) {
+    if (window == nullptr) {
         std::cout << "Window could not be created: " << SDL_GetError() << "\n";
         return 1;
     }
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    if(renderer == nullptr) {
+    if (renderer == nullptr) {
         std::cout << "Renderer could not be created: " << SDL_GetError() << "\n";
         return 1;
     }
